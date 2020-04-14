@@ -3,7 +3,7 @@
 *.war
 *.ear
 *.class
-*.jars
+*.jar
 
 # eclipse specific git ignore
 *.pydevproject
