@@ -1,0 +1,119 @@
+openapi: 3.0.1
+info:
+  title: Inventory services
+  description: RESTful APIs for inventory services
+  version: 1.0.0
+servers:
+- url: http://localhost/v1
+paths:
+  /inventories:
+    get:
+      summary: Get all inventories
+      operationId: getAllInventories
+      responses:
+        200:
+          description: All inventories
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Inventories'
+            application/json:
+              example: |-
+                {
+                  data: [
+                    {
+                      inventoryId: ,
+                      userId: 1,
+                      itemCode: "1",
+                      unitPrice: 1.0,
+                      quantity: 1,
+                      status: ""
+                    }
+                  ]
+                }
+    put:
+      summary: Add a new inventory
+      operationId: addInventory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inventory'
+        required: true
+      responses:
+        200:
+          description: The inventory added
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Inventory'
+            application/json:
+              example: |-
+                {
+                  data: [
+                    {
+                      inventoryId: 1,
+                      userId: 1,
+                      itemCode: "1",
+                      unitPrice: 1.0,
+                      quantity: 1,
+                      status: "INITIAL"
+                    }
+                  ]
+                }
+      x-codegen-request-body-name: body
+  /inventories/{inventoryId}:
+    get:
+      summary: Get an inventory by inventoryId
+      operationId: getInventoryById
+      parameters:
+      - name: inventoryId
+        in: path
+        description: inventory ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Get inventory with the given ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+              example: |-
+                {
+                      inventoryId: 1,
+                      userId: 1,
+                      itemCode: "1",
+                      unitPrice: 1.0,
+                      quantity: 1,
+                      status: "INITIAL"
+                }
+components:
+  schemas:
+    Inventory:
+      type: object
+      properties:
+        inventoryId:
+          type: integer
+        itemCode:
+          type: string
+        quantity:
+          type: integer
+        status:
+          type: string
+    Inventories:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Inventory'
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header

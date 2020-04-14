@@ -1,0 +1,12 @@
+{
+"apiPackage": "com.exercise.inventories.api",
+"groupId":"com.exercise.inventories",
+"artifactId": "inventory-services",
+"basePackage": "com.exercise.inventories",
+"configPackage": "com.exercise.inventories.config",
+"modelPackage": "com.exercise.inventories.model",
+"language": "spring-boot",
+"useRxJava":"true",
+"delegatePattern": "true",
+"hideGenerationTimestamp": "true"
+}
